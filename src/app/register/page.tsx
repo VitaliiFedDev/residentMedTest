@@ -35,23 +35,23 @@ export default function Register() {
     const newErrors = { username: '', email: '', password: '' };
 
     if (!formData.username.trim()) {
-      newErrors.username = 'Username is required';
+      newErrors.username = 'Username is required!';
       isValid = false;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = 'Email is required!';
       isValid = false;
     } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Email is invalid';
+      newErrors.email = 'Email is invalid!';
       isValid = false;
     }
 
     if (!formData.password) {
-      newErrors.password = 'Password is required';
+      newErrors.password = 'Password is required!';
       isValid = false;
     } else if (formData.password.length < 6) {
-      newErrors.password = 'Password must be at least 6 characters';
+      newErrors.password = 'Password must be at least 6 characters!';
       isValid = false;
     }
 
@@ -72,7 +72,7 @@ export default function Register() {
   return (
     <Container component="main" maxWidth="xs" className="mt-8">
       <Box className="flex flex-col items-center bg-white p-8 rounded-lg shadow-md">
-        <Typography component="h1" variant="h4" className="mb-4 text-green-600">
+          <Typography component="h1" variant="h4" className="mb-4 text-green-600">
           Register
         </Typography>
         <Box component="form" onSubmit={handleSubmit} noValidate className="w-full">
