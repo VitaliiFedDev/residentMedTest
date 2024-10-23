@@ -3,13 +3,25 @@
 import { AppBar, Toolbar, Button, Typography } from '@mui/material';
 import { useRouter } from 'next/navigation';
 
-const Navigation = () => {
+interface NavigationProps {
+  isAuthenticated: boolean;
+  setIsAuthenticated: (value: boolean) => void;
+}
+
+const Navigation = ({ isAuthenticated, setIsAuthenticated }: NavigationProps) => {
   const router = useRouter();
 
   const handleLogout = () => {
     localStorage.removeItem('authToken');
-    window.location.reload();
+    localStorage.removeItem('user');
+    localStorage.removeItem('matches');
+    setIsAuthenticated(false);
+    router.push('/login');
   };
+
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <AppBar position="static">
@@ -17,7 +29,7 @@ const Navigation = () => {
         <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
           Test App
         </Typography>
-        <Button color="inherit" onClick={() => router.push('/')}>
+        <Button color="inherit" onClick={() => router.push('/dashboard')}>
           Home
         </Button>
         <Button color="inherit" onClick={() => router.push('/my-matches')}>
